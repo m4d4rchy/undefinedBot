@@ -27,7 +27,7 @@ function main(client) {
             }
         }
     });
-    client.on('messageReactionRemove', (messageReaction, user) => {
+    /*client.on('messageReactionRemove', (messageReaction, user) => {
         var i = 0;
         for (var i = 0; i < reactionRoleData.length; i++) {
             var data = reactionRoleData[i];
@@ -41,7 +41,7 @@ function main(client) {
                 console.log("\n");
             }
         }
-    });
+    });*/
 }
 
 function reactionRole(msg, command, client, reactionRole) {
@@ -51,9 +51,7 @@ function reactionRole(msg, command, client, reactionRole) {
         let channel = collect.first();
         let guild = client.guilds.find(guild => guild.name === "{undefined}");
         let role = guild.roles.find(role => role.name === command[3]);
-        var emoji = guild.emojis.find(emoji => emoji.name === command[4].slice(0, -1));
-        if (emoji)
-            emoji = emoji.name;
+        var emoji = null;
         if (command[4][0] === '<') {
             emoji = command[4].slice(0, -1);
             emoji = emoji.slice(0);
@@ -64,11 +62,14 @@ function reactionRole(msg, command, client, reactionRole) {
         var find = emoji;
         var emojiObj = guild.emojis.find(emoji => emoji.name === find);
         channel.fetchMessage(command[2]).then(message => {
-            message.react(emojiObj);
+            if (emojiObj)
+                message.react(emojiObj);
+            else
+                message.react(command[4]);
         });
     }
     msg.reply("***Reaction Role***\nReaction role added.");
 }
 
-client.login('your token');
+client.login('NjE3MDkzMTI5NTE3OTI0MzY2.XWqBow.oo3JVwWILVx1ajU8aFKnGjR1Z9Y');
 main(client);
