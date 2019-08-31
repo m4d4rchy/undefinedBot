@@ -70,5 +70,5 @@ function reactionRole(msg, command, client, reactionRole) {
     msg.reply("***Reaction Role***\nReaction role added.");
 }
 
+client.login('your token');
 main(client);
-client.login('NjE3MDkzMTI5NTE3OTI0MzY2.XWmIZA.R-4bXnkKqSRLwU2BPk0j90Mx56k');
