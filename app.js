@@ -21,13 +21,13 @@ function main(client) {
                 const member = messageReaction.message.guild.members.get(user.id);
                 role = messageReaction.message.guild.roles.find(role => role.id === data[2]);
                 member.addRole(role.id);
-                console.log("Remove Role");
+                console.log("Add Role");
                 console.log(role.name);
                 console.log("\n");
             }
         }
     });
-    /*client.on('messageReactionRemove', (messageReaction, user) => {
+    client.on('messageReactionRemove', (messageReaction, user) => {
         var i = 0;
         for (var i = 0; i < reactionRoleData.length; i++) {
             var data = reactionRoleData[i];
@@ -36,12 +36,12 @@ function main(client) {
                 const member = messageReaction.message.guild.members.get(user.id);
                 role = messageReaction.message.guild.roles.find(role => role.id === data[2]);
                 member.removeRole(role.id);
-                console.log("Add Role");
+                console.log("Remove Role");
                 console.log(role.name);
                 console.log("\n");
             }
         }
-    });*/
+    });
 }
 
 function reactionRole(msg, command, client, reactionRole) {
@@ -51,16 +51,17 @@ function reactionRole(msg, command, client, reactionRole) {
         let channel = collect.first();
         let guild = client.guilds.find(guild => guild.name === "{undefined}");
         let role = guild.roles.find(role => role.name === command[3]);
-        var emoji = null;
+        var emoji = command[4];
         if (command[4][0] === '<') {
             emoji = command[4].slice(0, -1);
             emoji = emoji.slice(0);
             var temp = emoji.split(":");
             emoji = temp[1];
         }
-        reactionRoleData.push([channel.id, command[2], role.id, emoji]);
         var find = emoji;
         var emojiObj = guild.emojis.find(emoji => emoji.name === find);
+        console.log(emoji);
+        reactionRoleData.push([channel.id, command[2], role.id, emoji]);
         channel.fetchMessage(command[2]).then(message => {
             if (emojiObj)
                 message.react(emojiObj);
@@ -71,5 +72,5 @@ function reactionRole(msg, command, client, reactionRole) {
     msg.reply("***Reaction Role***\nReaction role added.");
 }
 
-client.login('yourtoken');
+client.login('NjE3MDkzMTI5NTE3OTI0MzY2.XWqFuw.es1t_Z2BcXQryi-YZJlJVK_iJMg');
 main(client);
