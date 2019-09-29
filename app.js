@@ -91,7 +91,7 @@ function main(client) {
                         var rest = playerLevels[msg.author.id][1] - playerLevels[msg.author.id][2];
                         playerLevels[msg.author.id][1] = rest;
                         playerLevels[msg.author.id][0] = playerLevels[msg.author.id][0] + 1;
-                        playerLevels[msg.author.id][2] = 5 * ((playerLevels[msg.author.id][0] + 1) * (playerLevels[msg.author.id][0] + 1)) + 50 * playerLevels[msg.author.id][0] + 1 + 100;
+                        playerLevels[msg.author.id][2] = 5 * ((playerLevels[msg.author.id][0] + 1) * (playerLevels[msg.author.id][0] + 1)) + 50 * (playerLevels[msg.author.id][0] + 1) + 100;
                         msg.channel.send(`GG <@${msg.author.id}>, tu monte au niveau ${playerLevels[msg.author.id][0]}!`);
                     }
                 }
