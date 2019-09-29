@@ -66,7 +66,7 @@ function main(client) {
     });
     client.on('message', msg => {
         command = msg.content.split(" ");
-        if (command[0] == '!!reactionrole' && msg.member.roles.find(r => r.name === "Admin"))
+        if (command[0] == '!reactionrole' && msg.member.roles.find(r => r.name === "Admin"))
             reactionRole(msg, command, client);
         else if (command[0] == '!say' && msg.member.roles.find(r => r.name === "Admin")) {
             command = msg.content.split(" ", 2);
