@@ -1,6 +1,6 @@
 # undefinedBot
-Discord bot for undefined server.
-
+This bot has been made for the undefined discord server.
+https://discordapp.com/invite/XDdZDZk
 
 ## Get Started
 Install npm dependencies
