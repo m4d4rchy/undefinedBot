@@ -98,3 +98,6 @@ public
 .dynamodb/
 
 key.js
+config.json
+command
+messages
