@@ -66,7 +66,7 @@ function main(client) {
     });
     client.on('message', msg => {
         command = msg.content.split(" ");
-        if (command[0] == '!reactionrole' && msg.member.roles.find(r => r.name === "Admin"))
+        if (command[0] == '!!reactionrole' && msg.member.roles.find(r => r.name === "Admin"))
             reactionRole(msg, command, client);
         else if (command[0] == '!say' && msg.member.roles.find(r => r.name === "Admin")) {
             command = msg.content.split(" ", 2);
@@ -169,28 +169,46 @@ function reactionRole(msg, command, client) {
             return (-1);
         }
         var emoji = command[4];
+        emoji = emoji.toString();
         if (command[4][0] === '<') {
             emoji = command[4].slice(0, -1);
             emoji = emoji.slice(0);
             var temp = emoji.split(":");
             emoji = temp[1];
+            var find = emoji;
+            var emojiObj = guild.emojis.find(emoji => emoji.name === find);
+            if (emojiObj === null) {
+                embedMessage(client, msg.channel.id, "\n\nError: Emoji not found!\n\n");
+                return (-1);
+            }
         }
-        var find = emoji;
-        var emojiObj = guild.emojis.find(emoji => emoji.name === find);
-        if (emojiObj === null) {
-            embedMessage(client, msg.channel.id, "\n\nError: Emoji not found!\n\n");
-            return (-1);
-        }
-        reactionRoleData.push([channel.id, command[2], role.id, emoji]);
         channel.fetchMessage(command[2]).then(message => {
-            if (emojiObj)
-                message.react(emojiObj);
-            else
-                message.react(command[4]);
+            if (emojiObj) {
+                message.react(emojiObj)
+                    .then(function (data) {
+                        reactionRoleData.push([channel.id, command[2], role.id, emoji]);
+                        msg.reply("\n***\t--- Reaction Role ---***\nReaction role added.");
+                        saveData();
+                    })
+                    .catch(function (error) {
+                        embedMessage(client, msg.channel.id, "\n\nError: Emoji not found!\n\n");
+                        return (-1);
+                    });
+            }
+            else {
+                message.react(command[4])
+                    .then(function (data) {
+                        reactionRoleData.push([channel.id, command[2], role.id, emoji]);
+                        msg.reply("\n***\t--- Reaction Role ---***\nReaction role added.");
+                        saveData();
+                    })
+                    .catch(function (error) {
+                        embedMessage(client, msg.channel.id, "\n\nError: Emoji not found!\n\n");
+                        return (-1);
+                    });
+            }
         });
     }
-    msg.reply("\n***\t--- Reaction Role ---***\nReaction role added.");
-    saveData();
 }
 
 function say(msg, command, client) {
