@@ -9,6 +9,10 @@
   "author": "gameeklab",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "file-system": "^2.2.2",
+    "giphy-api": "^2.0.1",
+    "uws": "^100.0.1",
+    "youtube-search": "^1.1.4"
   }
 }
