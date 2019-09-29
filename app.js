@@ -80,6 +80,8 @@ function main(client) {
             myLevel(msg, command, client);
         else if (command[0] == '!gif')
             findGif(msg, command, client);
+        else if (command[0] == '!help')
+            help(msg, command, client);
         else {
             if (msg.author.bot === false) {
                 if (playerLevels[msg.author.id]) {
@@ -285,6 +287,11 @@ function saveData() {
         if (err) throw err;
         console.log('File is created successfully.');
     });
+}
+
+function help(msg, command, client) {
+    var message = "[Undefined help menu (online version)](https://github.com/gameeklab/undefinedBot/wiki)\n***Admin:***\nreactionrole\nAdd a new reaction role\nUsage - !reactionrole <tagChannel> <messageId> <roleName> <emoji>\n\nsay\nMake the bot say something\nUsage - !say <message>\n\nclear\nClear messages\nUsage - !clear <amount>\n\n***Tools:***\nyoutube\nResearch on youtube\nUsage - !youtube <keywords>\n\nlevel\nLook for your current level\nUsage - !level\n\ngif\nLook for a random gif based on your keywords\nUsage - !gif <keywords>"
+    embedMessage(client, msg.channel.id, message);
 }
 
 client.login(apiKey.discordKey);
