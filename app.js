@@ -42,6 +42,7 @@ fs.open('config.json', 'r', (err, fd) => {
 function main(client) {
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`);
+        client.user.setActivity('!help');
     });
     client.on('raw', async event => {
         if (!events.hasOwnProperty(event.t)) return;
