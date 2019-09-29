@@ -65,19 +65,19 @@ function main(client) {
     });
     client.on('message', msg => {
         command = msg.content.split(" ");
-        if (command[0] == '!!reactionrole' && msg.member.roles.find(r => r.name === "Admin"))
+        if (command[0] == '!reactionrole' && msg.member.roles.find(r => r.name === "Admin"))
             reactionRole(msg, command, client);
-        else if (command[0] == '!!say' && msg.member.roles.find(r => r.name === "Admin")) {
+        else if (command[0] == '!say' && msg.member.roles.find(r => r.name === "Admin")) {
             command = msg.content.split(" ", 2);
             say(msg, command, client);
         }
-        else if (command[0] == '!!clear' && msg.member.roles.find(r => r.name === "Admin"))
+        else if (command[0] == '!clear' && msg.member.roles.find(r => r.name === "Admin"))
             clear(msg, command, client);
-        else if (command[0] == '!!youtube')
+        else if (command[0] == '!youtube')
             findYoutube(msg, command, client);
-        else if (command[0] == '!!level')
+        else if (command[0] == '!level')
             myLevel(msg, command, client);
-        else if (command[0] == '!!gif')
+        else if (command[0] == '!gif')
             findGif(msg, command, client);
         else {
             if (msg.author.bot === false) {
